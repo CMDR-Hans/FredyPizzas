@@ -23,14 +23,50 @@ os.system("cls")
 pokedex = []
 
 while True:
+    os.system("cls")
     print(menu)
     opcion = input("Ingrese una opción: ")
-    
+    os.system("cls")
+
+
     if opcion == "1":
         # Agregar pokemon
-        numero = input("Ingrese el número del pokemon: ")
-        nombre = input("Ingrese el nombre del pokemon: ")
-        altura = input("Ingrese la altura del pokemon: ")
+        while True:
+            try:
+                numero = int(input("Ingrese el número del pokemon: "))
+                if numero <=0:
+                    print("El número del pokemon debe ser un entero positivo. Intente nuevamente.")
+                    continue
+                else:
+                    break
+            except:
+                print("Entrada inválida. Por favor, ingrese un número entero positivo.")
+                print("\n...presione una tecla para continuar...")
+                msvcrt.getch()
+
+        while True:
+            try:
+                nombre = input("Ingrese el nombre del pokemon: ").strip().title()
+                if len(nombre)>=3 and nombre.isalpha():
+                    break
+                else:
+                    print("Nombre muy corto para tu puchaball")
+            except:
+                print("El nombre del pokemon debe contener solo letras y tener al menos 3 caracteres.")
+                print("\n...presione una tecla para continuar...")
+                msvcrt.getch()
+
+        while True:
+            try:
+                altura = float(input("Ingrese la altura del pokemon: "))
+                if altura <= 0:
+                    print("La altura debe ser un número positivo. Intente nuevamente.")
+                else:
+                    break
+            except ValueError:
+                print("Entrada inválida. Por favor, ingrese un número válido para la altura.")
+                print("\n...presione una tecla para continuar...")
+                msvcrt.getch()
         
         pokedex.append({
             "numero": numero,
@@ -58,3 +94,5 @@ while True:
     
     else:
         print("Opción no válida. Intente nuevamente.")
+        print("\n...presione una tecla para continuar...")
+        msvcrt.getch()
