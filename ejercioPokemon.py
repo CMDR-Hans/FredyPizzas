@@ -67,13 +67,21 @@ while True:
                 print("Entrada inválida. Por favor, ingrese un número válido para la altura.")
                 print("\n...presione una tecla para continuar...")
                 msvcrt.getch()
-        
-        pokedex.append({
-            "numero": numero,
-            "nombre": nombre,
-            "altura": altura
-        })
-        print("Pokemon agregado exitosamente.")
+        for p in pokedex:
+            if p["numero"]==numero or p["nombre"]==nombre:
+                print("Ya existe un pokemon con ese número o ese nombre. Intente nuevamente.")
+                print("\n...presione una tecla para continuar...")
+                msvcrt.getch()
+                break
+            else:
+                pokedex.append({
+                "numero": numero,
+                "nombre": nombre,
+                "altura": altura
+                })
+                print("Pokemon agregado exitosamente.")
+                print("\n...presione una tecla para continuar...")
+                msvcrt.getch()
     
     elif opcion == "2":
         # Ver pokemones
@@ -89,7 +97,31 @@ while True:
     
     elif opcion == "3":
         # Eliminar pokemon
-            pass
+        if not pokedex:
+            print("No hay pokemones registrados para eliminar.")
+        else:
+            while True:
+                try:
+                    numero = int(input("Ingrese el número del pokemon a eliminar: "))
+                    if numero <= 0:
+                        print("El número del pokemon debe ser un entero positivo. Intente nuevamente.")
+                        continue
+                    break
+                except :
+                    print("Entrada inválida. Por favor, ingrese un número entero positivo.")
+                    print("\n...presione una tecla para continuar...")
+                    msvcrt.getch()
+
+            verificador = False
+            for p in pokedex:
+                if p["numero"] == numero:
+                    pokedex.remove(p)
+                    verificador= True
+                    print(f"Pokemon {p['nombre']} eliminado exitosamente.")
+                    break
+            
+            if verificador == False:
+                print("Pokemon no encontrado.")
     elif opcion == "4":
         # Salir
         print("Saliendo de la pokedex...")
