@@ -1,17 +1,3 @@
-#Ejercicio sobre colecciones:
-#Se pide crear un programa para almacenar pokemones.
-#La información del pokemon debe ser número, nombre y altura.
-#El programa debe mostrar las siguientes opciones:
-#===MENU===
-#1. Agregar pokemon
-#2. Ver pokemones
-#3. Eliminar pokemon
-#4. Salir
-#Importante:
-#- Debe validar todos los valores que se ingresen por teclado, y volver a solicitarlo si existe algún error.
-#- La información de los pokemones se debe almacenar en un formato de lista de diccionarios.
-
-
 menu="""===MENU===
 #1. Agregar pokemon
 #2. Ver pokemones
