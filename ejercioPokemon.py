@@ -18,7 +18,7 @@ menu="""===MENU===
 #3. Eliminar pokemon
 #4. Salir"""
 
-import os, msvcrt
+import os, msvcrt, operator
 os.system("cls")
 pokedex = []
 
@@ -80,13 +80,16 @@ while True:
         if not pokedex:
             print("No hay pokemones registrados.")
         else:
+            #Esta la aprendi de gugle
+            pokedex.sort(key=operator.itemgetter("numero"))
             for p in pokedex:
                 print(f"Numero: {p['numero']}, Nombre: {p['nombre']}, Altura: {p['altura']} m")
+        print("\n...presione una tecla para continuar...")
+        msvcrt.getch()
     
     elif opcion == "3":
         # Eliminar pokemon
-        pass
-    
+            pass
     elif opcion == "4":
         # Salir
         print("Saliendo de la pokedex...")
