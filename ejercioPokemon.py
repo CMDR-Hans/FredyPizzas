@@ -6,8 +6,8 @@ menu="""===MENU===
 
 import os, msvcrt, operator
 os.system("cls")
-pokedex = []
-
+pokedex=[]
+repetido=False
 while True:
     os.system("cls")
     print(menu)
@@ -22,7 +22,8 @@ while True:
                 numero = int(input("Ingrese el número del pokemon: "))
                 if numero <=0:
                     print("El número del pokemon debe ser un entero positivo. Intente nuevamente.")
-                    continue
+                    print("\n...presione una tecla para continuar...")
+                    msvcrt.getch()
                 else:
                     break
             except:
@@ -37,6 +38,8 @@ while True:
                     break
                 else:
                     print("Nombre muy corto para tu puchaball")
+                    print("\n...presione una tecla para continuar...")
+                    msvcrt.getch()
             except:
                 print("El nombre del pokemon debe contener solo letras y tener al menos 3 caracteres.")
                 print("\n...presione una tecla para continuar...")
@@ -53,22 +56,24 @@ while True:
                 print("Entrada inválida. Por favor, ingrese un número válido para la altura.")
                 print("\n...presione una tecla para continuar...")
                 msvcrt.getch()
+
         for p in pokedex:
             if p["numero"]==numero or p["nombre"]==nombre:
                 print("Ya existe un pokemon con ese número o ese nombre. Intente nuevamente.")
                 print("\n...presione una tecla para continuar...")
                 msvcrt.getch()
+                repetido = True
                 break
-            else:
-                pokedex.append({
+        if repetido==False:
+            pokedex.append({
                 "numero": numero,
                 "nombre": nombre,
                 "altura": altura
                 })
-                print("Pokemon agregado exitosamente.")
-                print("\n...presione una tecla para continuar...")
-                msvcrt.getch()
-    
+                
+            print("Pokemon agregado exitosamente.")
+            print("\n...presione una tecla para continuar...")
+            msvcrt.getch()
     elif opcion == "2":
         # Ver pokemones
         if not pokedex:
