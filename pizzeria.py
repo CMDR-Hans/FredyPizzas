@@ -126,49 +126,79 @@ while True:
             print("Ingrese cualquier tecla.")
             msvcrt.getch()
     elif opcion=="3":
-        while True:
-            try: 
-                codigo=int(input("Ingrese el código del vieojuego a modificar: "))
-                break
-            except:
-                print("Ingrese un número valido")
-                print("Ingrese cualquier tecla...")
-                msvcrt.getch()
-        encontrado=False
-        for v in videosjuegos:
-            if v["codigo"]==codigo:
-                v["nombre"]==input("Nuevo nombre: ").strip()
-                v["genero"]==input("Nuevo género: ")
-
-                print("\nPlataformas disponibles:")
-                print("1. PC")
-                print("2. PS5")
-                print("3. Xbox Serie X")
-                print("4. Nintengo switch")
-                while True:
-                    try:
-                        plataforma_codigo=int(input("Seleccione el número de la nueva plataforma: "))
-                        if plataforma_codigo>0 and plataforma_codigo<5:
-                            break
-                        else:
-                            print("Numero no valido")
-                            print("Ingrese cualquier tecla...")
-                            msvcrt.getch()
-                    except:
-                        print("Ingrese un numero valido")
-                        print("Ingrese cualquier tecla...")
-                        msvcrt.getch()
-                v["plataforma"]=plataformas[plataforma_codigo - 1]
-                #Otra vez se hace esto 
-
-                print("Videojuego modificado correctamente.")
-                time.sleep(2)
-                encontrado=True
-                break
-        if not encontrado:
-            print("Videojuego no encontrado.")
+        #realizar pedido
+        if len(ListaPizzas)==0:
+            print("No hay pizzas registradas para realizar un pedido.")
             print("Ingrese cualquier tecla...")
             msvcrt.getch()
+        else:
+            #pedimo el nombre del cliente
+            while True:
+                nombre_cliente=input("Ingrese el nombre del cliente: ").strip().title()
+                #validamos que el nombre no este vacio
+                if len(nombre_cliente)>=3 and nombre_cliente.isalpha():
+                    break
+                else:
+                    print("Nombre muy corto o inválido para el cliente.")
+                    print("Ingrese cualquier tecla...")
+                    msvcrt.getch()
+            
+            #pedimos el codigo de la pizza    
+            while True:
+                try:
+                    codigopedido=int(input("Ingrese el código de la pizza que desea pedir: "))
+                    if codigopedido>0:
+                        break
+                    else:
+                        print("El código debe ser un número positivo.")
+                        print("Ingrese cualquier tecla...")
+                        msvcrt.getch()
+                except ValueError:
+                    print("Error. Por favor, ingrese un número válido para el código.")
+                    print("Ingrese cualquier tecla...")
+                    msvcrt.getch()
+            #cantidad de pizzas a pedir
+            while True:
+                try:
+                    cantidad_Pizzas=int(input("Ingrese la cantidad de pizzas a pedir: "))
+                    if cantidad_Pizzas>0:
+                        break
+                    else:
+                        print("La cantidad debe ser un número positivo.")
+                        print("Ingrese cualquier tecla...")
+                        msvcrt.getch()
+                except ValueError:
+                    print("Error. Por favor, ingrese un número válido para la cantidad.")
+                    print("Ingrese cualquier tecla...")
+                    msvcrt.getch()
+            encontrado=False
+            for p in ListaPizzas:
+                if p["codigo"]==codigo:
+                    if p["stock"]>=cantidad_Pizzas:
+                        p["stock"]-=cantidad_Pizzas
+                        print(f"Pedido realizado exitosamente para {nombre_cliente}.")
+                        print(f"Cantidad de pizzas: {cantidad_Pizzas}, Total a pagar: {p['precio'] * cantidad_Pizzas}")
+                        print("Ingrese cualquier tecla...")
+                        msvcrt.getch()
+                        encontrado=True
+                        compra_Pizza={
+                            "cliente": nombre_cliente,
+                            "codigo_pizza": p["codigo"],
+                            "nombre_pizza": p["nombre"],
+                            "cantidad": cantidad_Pizzas,
+                            "total": p["precio"] * cantidad_Pizzas
+                        }
+                        break
+                    else:
+                        print(f"No hay suficiente stock de la pizza {p['nombre']}. Stock disponible: {p['stock']}")
+                        print("Ingrese cualquier tecla...")
+                        msvcrt.getch()
+                        encontrado=True
+                        break
+            if not encontrado:
+                print("Pizza no encontrada.")
+                print("Ingrese cualquier tecla...")
+                msvcrt.getch()
 
     elif opcion=="4":
         while True:
