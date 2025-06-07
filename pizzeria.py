@@ -201,30 +201,20 @@ while True:
                 msvcrt.getch()
 
     elif opcion=="4":
-        while True:
-            try:
-                codigo=int(input("Ingrese el código del viojuego a eliminar: "))
-                break
-            except:
-                print("ingrese un codigo valido")
-                print("Ingrese cualquier tecla...")
-                msvcrt.getch()
-        eliminado=False
-        for v in videosjuegos:
-            if v["codigo"]==codigo:
-                videosjuegos.remove(v)
-                print("Videojuego eliminado correctamente.")
-                print("Ingrese cualquier tecla...")
-                msvcrt.getch()
-                eliminado=True
-                break
-        if not eliminado:
-            print("Videojuego no encontrado.")
+        #ver pedidos realizados
+        if len(ListaPizzas)==0:
+            print("No hay pedidos realizados.")
+            print("Ingrese cualquier tecla...")
+            msvcrt.getch()
+        else:
+            print("\n--- PEDIDOS REALIZADOS ---")
+            for p in compra_Pizza:
+                print(f"Cliente: {p['cliente']}, Código de pizza: {p['codigo_pizza']}, Nombre de pizza: {p['nombre_pizza']}, Cantidad: {p['cantidad']}, Total: {p['total']}")
             print("Ingrese cualquier tecla...")
             msvcrt.getch()
 
     elif opcion=="5":
-        print("Saliendo del programa.")
+        print("arrivederci.")
         break
     else:
         print("Opcion inválida.")
