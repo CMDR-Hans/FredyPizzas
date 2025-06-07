@@ -113,14 +113,16 @@ while True:
         ListaPizzas.append(pizza)
 
     elif opcion=="2":
-        if len(videosjuegos)==0:
-            print("No hay videojuegos registrados.")
+        #validamos que haya pizzas registradas
+        if len(ListaPizzas)==0:
+            print("No hay pizzas registradas.")
             print("Ingrese cualquier tecla...")
             msvcrt.getch()
         else:
-            print("\n--- LISTA DE VIDEOJUEGOS ---")
-            for v in videosjuegos:
-                print(f"codigo: {v["codigo"]}, Nombre: {v["nombre"]}, Género: {v["genero"]}, Plataforma: {v["plataforma"]}")
+            #llegaron las pipsas
+            print("\n--- LISTA DE PIZZAS ---")
+            for p in ListaPizzas:
+                print(f"codigo: {v["codigo"]}, Nombre: {v["nombre"]}, tipo de masa: {v["masa"]}, precio: {v["precio"]}, stock: {v["stock"]}")
             print("Ingrese cualquier tecla.")
             msvcrt.getch()
     elif opcion=="3":
