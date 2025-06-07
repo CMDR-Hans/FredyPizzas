@@ -1,6 +1,6 @@
 #Creamos una lista vacia para almacenar las pizzas
 ListaPizzas=[]
-
+Lista_pedidos=[]
 # Importamos las librerias necesarias
 import os,msvcrt,time
 
@@ -42,9 +42,9 @@ while True:
                 msvcrt.getch()
         # pedimos el nombre de la pizza y validamos
         while True:
-                nombre=input("Ingrese el nombre de la pizza: ").strip()
+                nombre=input("Ingrese el nombre de la pizza: ").strip().lower()
                 if len(nombre)>4:
-                    if any(p["nombre"].lower() == nombre.lower() for p in ListaPizzas):
+                    if any(p["nombre"]==nombre.lower() for p in ListaPizzas):
                         print("El nombre ya existe. Ingrese un nombre diferente.")
                         print("Ingrese cualquier tecla...")
                         msvcrt.getch()
@@ -77,7 +77,7 @@ while True:
         # Precio de la pizza
         while True:
             try:
-                precio=float(input("Ingrese el precio de la pizza: "))
+                precio=int(input("Ingrese el precio de la pizza: "))
                 if precio>9999:
                     break
                 else:
@@ -122,7 +122,7 @@ while True:
             #llegaron las pipsas
             print("\n--- LISTA DE PIZZAS ---")
             for p in ListaPizzas:
-                print(f"codigo: {v["codigo"]}, Nombre: {v["nombre"]}, tipo de masa: {v["masa"]}, precio: {v["precio"]}, stock: {v["stock"]}")
+                print(f"codigo: {p["codigo"]}, Nombre: {p["nombre"]}, tipo de masa: {p["masa"]}, precio: {p["precio"]}, stock: {p["stock"]}")
             print("Ingrese cualquier tecla.")
             msvcrt.getch()
     elif opcion=="3":
@@ -134,7 +134,7 @@ while True:
         else:
             #pedimo el nombre del cliente
             while True:
-                nombre_cliente=input("Ingrese el nombre del cliente: ").strip().title()
+                nombre_cliente=input("Ingrese el nombre del cliente: ").strip().lower()
                 #validamos que el nombre no este vacio
                 if len(nombre_cliente)>=3 and nombre_cliente.isalpha():
                     break
@@ -188,6 +188,7 @@ while True:
                             "cantidad": cantidad_Pizzas,
                             "total": p["precio"] * cantidad_Pizzas
                         }
+                        Lista_pedidos.append(compra_Pizza)
                         break
                     else:
                         print(f"No hay suficiente stock de la pizza {p['nombre']}. Stock disponible: {p['stock']}")
@@ -208,7 +209,7 @@ while True:
             msvcrt.getch()
         else:
             print("\n--- PEDIDOS REALIZADOS ---")
-            for p in compra_Pizza:
+            for p in Lista_pedidos:
                 print(f"Cliente: {p['cliente']}, Código de pizza: {p['codigo_pizza']}, Nombre de pizza: {p['nombre_pizza']}, Cantidad: {p['cantidad']}, Total: {p['total']}")
             print("Ingrese cualquier tecla...")
             msvcrt.getch()
